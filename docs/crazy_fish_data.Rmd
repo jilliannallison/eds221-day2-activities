@@ -1,0 +1,52 @@
+---
+title: "Crazy data"
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(dplyr)
+```
+
+## loading csv and practicing indexing
+```{r}
+mack_verts <- read_csv(here::here("data","AS00601.csv")) %>%
+  clean_names()
+
+
+mc_weight_5 <- mack_verts$weight[5]
+mc_length_8_20 <- mack_verts$length1[8:20]
+mc_dates <- mack_verts$sampledate[]
+
+
+```
+## salamanders stuff
+```{r}
+mc_salamanders <- mack_verts %>% 
+  filter(species == "DITE")
+
+mc_salamanders_2 <- filter(mack_verts, species=="DITE") # another option for filtering this 
+```
+## ggplot 
+```{r}
+salamander_plot <- ggplot(data = mc_salamanders, aes(x = length1, y = weight)) + 
+  geom_point(aes(color = reach)) + 
+  xlab("Length") + 
+  ylab("Weight") +
+  labs(title = "Salamander length vs. weight") +
+  scale_color_manual(values = c("L" = "red", 
+                                "M" = "dodgerblue",
+                                "U" = "pink")) + 
+  facet_wrap(~reach)
+  
+
+ggsave(here::here("figs","salamander_plot.png"), 
+       width = 6,
+       height = 6)
+```
+

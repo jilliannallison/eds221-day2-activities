@@ -1,0 +1,43 @@
+---
+title: "EDS 221 Day 2 Activities"
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Vectors, lists, and data frames 
+
+```{r}
+vec_1 <- c(2, 5, 9, 10, 8, 12, 1, 0) 
+class(vec_1)
+typeof(vec_1)
+vec_1_e3 <- vec_1[3] 
+vec_1_e1 <- vec_1[1]
+vec_1_e5to7 <- vec_1[5:7]
+vec_1_char <- as.character(vec_1)
+vec_1_char
+```
+
+```{r}
+vec_2 <- c(town = "Santa Barbara", location = "Rincon", swell = "south")
+class(vec_2)
+length(vec_2)
+vec_2_e2 <- vec_2[2]
+```
+
+```{r}
+region <- c("A","B","A","D")
+species <- c("otter","great white","sea lion", "gray whale")
+count <- c(12, 2, 36, 6)
+
+df_1 <- data.frame(region, species, count)
+class(df_1)
+class(df_1$species)
+
+max_count <- max(df_1$count)
+```
+
